@@ -29,5 +29,6 @@
     "middleware/verifyToken.js",
     "middleware/verifyAdmin.js"
   ],
+  "typeRoots": ["./node_modules/@types"],
   "exclude": ["node_modules"]
 }
