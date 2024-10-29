@@ -15,8 +15,9 @@ export default function Error() {
                 We lost this page
               </h1>
               <p className="mt-4 text-gray-500 dark:text-gray-400">
-                We searched high and low, but couldn't find what you're looking
-                for.Let's find a better place for you to go.
+                We searched high and low, but couldn&apos;t find what
+                you&apos;re looking for.Let&apos;s find a better place for you
+                to go.
               </p>
 
               <div className="mt-6 flex w-full shrink-0 items-center gap-x-3 sm:w-auto">
@@ -167,7 +168,7 @@ export default function Error() {
                 </h3>
 
                 <p className="mt-2 text-gray-500 dark:text-gray-400">
-                  Can’t find what you’re looking for?
+                  Can&apos;t find what you&apos;re looking for?
                 </p>
 
                 <a

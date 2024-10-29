@@ -57,7 +57,7 @@ const Navbar = () => {
             width={40}
           />
         </div>
-        <span className="ml-2 text-small font-medium">Bro Audio</span>
+        <span className="ml-2 text-small font-medium">Devocode</span>
       </NavbarBrand>
 
       {/* Center Content */}

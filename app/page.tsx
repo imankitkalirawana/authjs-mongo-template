@@ -1,30 +1,22 @@
 import React from 'react';
+import Image from 'next/image';
+import { Code } from '@nextui-org/react';
 export default function Home() {
-  const data = [
-    { id: 1, name: 'John Doe', age: 28 },
-    { id: 2, name: 'Jane Smith', age: 34 },
-    { id: 3, name: 'Bob Johnson', age: 45 }
-  ];
   return (
     <>
-      <table className="border-collapse border border-white">
-        <thead>
-          <th className="border border-white">ID</th>
-          <th className="border border-white">Name</th>
-          <th className="border border-white">Age</th>
-        </thead>
-        <tbody>
-          {data.map((item) => (
-            <React.Fragment key={item.id}>
-              <tr>
-                <td className="border border-white">{item.id}</td>
-                <td className="border border-white">{item.name}</td>
-                <td className="border border-white">{item.age}</td>
-              </tr>
-            </React.Fragment>
-          ))}
-        </tbody>
-      </table>
+      <div className="flex h-screen flex-col items-center justify-center space-y-10 bg-black">
+        <Image
+          width={512}
+          height={512}
+          src="/logo.png"
+          alt="Platforms on Vercel"
+          className="w-48"
+        />
+        <h1 className="text-white">
+          Edit this page on
+          <Code> app/home/page.tsx</Code>
+        </h1>
+      </div>
     </>
   );
 }

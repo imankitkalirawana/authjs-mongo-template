@@ -145,7 +145,7 @@ export default function Register() {
                       </InputOTPGroup>
                     </InputOTP>
                     <div className="mt-4 flex flex-col items-center justify-between px-1 py-2 text-small text-default-500">
-                      <p>Didn't receive the code?</p>
+                      <p>Didn&apos;t receive the code?</p>
                       <span
                         className="cursor-pointer select-none text-primary hover:underline"
                         onClick={resendOtp}
