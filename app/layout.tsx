@@ -19,11 +19,11 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className="bg-background text-foreground"
+      className="light"
     >
       <body>
         <Providers>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeProvider attribute="class" defaultTheme="light">
             <Navbar />
             {children}
             <Sonner />
