@@ -12,12 +12,13 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   Divider
-} from '@nextui-org/react';
+} from '@heroui/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { signOut } from 'next-auth/react';
 
-const Navbar = () => {
+const Navbar = ({ session }: { session: any }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const pathname = usePathname();
   if (pathname.includes('/auth')) return null;
@@ -91,27 +92,41 @@ const Navbar = () => {
 
       {/* Right Content */}
       <NavbarContent className="hidden md:flex" justify="end">
-        <NavbarItem className="ml-2 !flex gap-2">
-          <Button
-            className="text-default-500"
-            as={Link}
-            href="/auth/login"
-            radius="full"
-            variant="light"
-          >
-            Login
-          </Button>
-          <Button
-            color="primary"
-            endContent={<Icon icon="solar:alt-arrow-right-linear" />}
-            radius="full"
-            variant="flat"
-            as={Link}
-            href="/auth/register"
-          >
-            Get Started
-          </Button>
-        </NavbarItem>
+        {session ? (
+          <NavbarItem className="ml-2 !flex gap-2">
+            <Button
+              onPress={() => signOut()}
+              className="text-default-500"
+              radius="full"
+              variant="light"
+              color="danger"
+            >
+              Logout
+            </Button>
+          </NavbarItem>
+        ) : (
+          <NavbarItem className="ml-2 !flex gap-2">
+            <Button
+              className="text-default-500"
+              as={Link}
+              href="/auth/login"
+              radius="full"
+              variant="light"
+            >
+              Login
+            </Button>
+            <Button
+              color="primary"
+              endContent={<Icon icon="solar:alt-arrow-right-linear" />}
+              radius="full"
+              variant="flat"
+              as={Link}
+              href="/auth/register"
+            >
+              Get Started
+            </Button>
+          </NavbarItem>
+        )}
       </NavbarContent>
 
       <NavbarMenuToggle className="text-default-400 md:hidden" />
@@ -128,21 +143,31 @@ const Navbar = () => {
           }
         }}
       >
-        <NavbarMenuItem>
-          <Button fullWidth as={Link} href="/auth/register" variant="faded">
-            Sign In
-          </Button>
-        </NavbarMenuItem>
-        <NavbarMenuItem className="mb-4">
-          <Button
-            fullWidth
-            as={Link}
-            className="bg-foreground text-background"
-            href="/auth/register"
-          >
-            Get Started
-          </Button>
-        </NavbarMenuItem>
+        {session ? (
+          <NavbarMenuItem>
+            <Button fullWidth variant="faded">
+              Logout
+            </Button>
+          </NavbarMenuItem>
+        ) : (
+          <>
+            <NavbarMenuItem>
+              <Button fullWidth as={Link} href="/auth/register" variant="faded">
+                Sign In
+              </Button>
+            </NavbarMenuItem>
+            <NavbarMenuItem className="mb-4">
+              <Button
+                fullWidth
+                as={Link}
+                className="bg-foreground text-background"
+                href="/auth/register"
+              >
+                Get Started
+              </Button>
+            </NavbarMenuItem>
+          </>
+        )}
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link className="mb-2 w-full text-default-500" href="#">
