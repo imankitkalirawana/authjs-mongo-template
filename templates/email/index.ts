@@ -32,6 +32,7 @@ export function WelcomeUser(user: UserType) {
                 line-height: 1.1;
                 margin: 40px 0;
                 color: #1d1d1f;
+                text-align: center;
             }
             .highlight {
                 background-color: #fef6d6;
@@ -44,18 +45,14 @@ export function WelcomeUser(user: UserType) {
                 margin: 20px auto;
                 max-width: 750px;
                 margin-bottom: 40px;
+                text-align: center;
             }
-            .btn {
+            .link {
                 text-decoration: none;
-                font-size: 16px;
-                margin-top: 20px;
-                display: inline-block;
-                border-radius: 50px;
-                padding: 8px 16px;
+                color: #1255CC;
             }
-            .btn-primary {
-                background-color: #1f6439;
-                color: #fff;
+            .link:hover {
+                text-decoration: underline;
             }
             .learn-more:hover {
                 text-decoration: underline;
@@ -64,6 +61,7 @@ export function WelcomeUser(user: UserType) {
                 font-size: 12px;
                 color: #1d1d1f;
                 margin-top: 40px;
+                text-align: center;
             }
             </style>
         </head>
@@ -79,22 +77,15 @@ export function WelcomeUser(user: UserType) {
             <h1 class="heading">Welcome to ${APP_INFO.name}, ${user.name}!</h1>
 
             <p class="description">
-            Your account has been created for ${APP_INFO.name}, you can now track your
-            appointments, view your medical records, and more.
+            Your account has been created for ${APP_INFO.name}, you can now explore the platform.
             </p>
             <p class="description">
-            We are excited to have you on board. If you have any questions or need
+            We are excited to have you onboard. If you have any questions or need
             assistance, please feel free to reach out to us.
             </p>
             <p class="description">
-            Please use your email <strong>${user.email}</strong> to login.
+            Please use your email <strong>${user.email}</strong> to <a class="link href="${APP_INFO.url}auth/login">login</a>.
             </p>
-        
-
-            <div class="flex justify-center">
-                <a href="${APP_INFO.url}auth/login" class="btn btn-primary">Login</a>
-            </div>
-
             <p class="overview">
             You are getting this email because you have registered with ${APP_INFO.name}
             </p>

@@ -6,7 +6,7 @@ import User from '@/models/User';
 import { connectDB } from '../db';
 import { generateOtp } from '../functions';
 import { sendHTMLEmail } from './email';
-import { OtpEmail } from '@/templates/email';
+import { OtpEmail, WelcomeUser } from '@/templates/email';
 import bcrypt from 'bcryptjs';
 
 export const sendOTP = async ({
@@ -105,6 +105,17 @@ export const register = async ({
     throw new Error('Email already exists!');
   }
   const hashedPassword = await bcrypt.hash(password, 12);
-  await User.create({ email, password: hashedPassword, name });
+  await User.create({ email, password: hashedPassword, name }).then(
+    async (user) => {
+      const emailTasks = [
+        sendHTMLEmail({
+          to: email,
+          subject: `Welcome to ${APP_INFO.name}`,
+          html: WelcomeUser(user)
+        })
+      ];
+      Promise.all(emailTasks);
+    }
+  );
   return true;
 };
