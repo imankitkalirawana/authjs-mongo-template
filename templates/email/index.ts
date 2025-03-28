@@ -127,6 +127,7 @@ export function OtpEmail(otp: number) {
                 width: 180px;
                 height: 180px;
                 margin: 20px auto;
+                object-fit: contain;
             }
             .heading {
                 font-size: 32px;

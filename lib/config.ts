@@ -1,5 +1,5 @@
 export const APP_INFO = {
-  name: 'GoSprint',
+  name: 'Devocode',
   email: process.env.GMAIL || '',
   url: process.env.NEXTAUTH_URL || ''
 };

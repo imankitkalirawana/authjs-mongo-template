@@ -1,14 +1,12 @@
-import { Button, Card, Link as NextLink } from "@heroui/react";
+'use client';
+import { Button, Card, Link as NextLink } from '@heroui/react';
+import { Icon } from '@iconify/react/dist/iconify.js';
 import Link from 'next/link';
-import {
-  IconArrowNarrowLeft,
-  IconArrowNarrowRight,
-  IconBook,
-  IconFileDescription,
-  IconMessageCircle
-} from '@tabler/icons-react';
+import { useRouter } from 'nextjs-toploader/app';
 
 export default function NotFound() {
+  const router = useRouter();
+
   return (
     <>
       <section>
@@ -21,16 +19,17 @@ export default function NotFound() {
               </h1>
               <p className="mt-4 text-foreground-400">
                 We searched high and low, but couldn&apos;t find what
-                you&apos;re looking for.Let&apos;s find a better place for you
+                you&apos;re looking for. Let&apos;s find a better place for you
                 to go.
               </p>
 
               <div className="mt-6 flex w-full shrink-0 items-center gap-x-3 sm:w-auto">
                 <Button
                   variant="bordered"
-                  as={Link}
-                  href="/"
-                  startContent={<IconArrowNarrowLeft />}
+                  startContent={
+                    <Icon icon="solar:arrow-left-linear" width={18} />
+                  }
+                  onPress={() => router.back()}
                 >
                   Go Back
                 </Button>
@@ -43,7 +42,7 @@ export default function NotFound() {
 
             <div className="mx-auto mt-8 grid w-full max-w-6xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
               <Card radius="lg" className="p-6">
-                <IconFileDescription />
+                <Icon icon="solar:document-bold-duotone" width={20} />
 
                 <h3 className="mt-6 font-medium">Documentation</h3>
 
@@ -57,12 +56,12 @@ export default function NotFound() {
                   className="mt-4"
                 >
                   <span>Start learning</span>
-                  <IconArrowNarrowRight />
+                  <Icon icon="solar:arrow-right-linear" width={18} />
                 </NextLink>
               </Card>
 
               <Card radius="lg" className="p-6">
-                <IconBook />
+                <Icon icon="solar:book-bold-duotone" width={20} />
 
                 <h3 className="mt-6 font-medium">Our blog</h3>
 
@@ -77,12 +76,12 @@ export default function NotFound() {
                 >
                   <span>View latest posts</span>
 
-                  <IconArrowNarrowRight />
+                  <Icon icon="solar:arrow-right-linear" width={18} />
                 </NextLink>
               </Card>
 
               <Card radius="lg" className="p-6">
-                <IconMessageCircle />
+                <Icon icon="solar:chat-line-bold-duotone" width={20} />
 
                 <h3 className="mt-6 font-medium">Chat to us</h3>
 
@@ -99,7 +98,7 @@ export default function NotFound() {
                 >
                   <span>Chat to our team</span>
 
-                  <IconArrowNarrowRight />
+                  <Icon icon="" />
                 </NextLink>
               </Card>
             </div>
