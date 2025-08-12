@@ -15,6 +15,7 @@
     "@aws-sdk/client-s3": "^3.679.0",
     "@heroui/react": "2.7.5",
     "@iconify/react": "^5.0.2",
+    "@react-types/shared": "^3.31.0",
     "@tailwindcss/typography": "^0.5.15",
     "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",
