@@ -76,9 +76,9 @@ const config = {
           large: '1.75rem'
         },
         radius: {
-          small: '0.5rem',
-          medium: '0.75rem',
-          large: '0.875rem'
+          small: '0.75rem',
+          medium: '1rem',
+          large: '1.5rem'
         },
         borderWidth: {
           small: '1px',
