@@ -2,7 +2,6 @@ import NextAuth, { AuthError } from 'next-auth';
 import credentials from 'next-auth/providers/credentials';
 import Google from 'next-auth/providers/google';
 import bcrypt from 'bcryptjs';
-import { MongoDBAdapter } from '@auth/mongodb-adapter';
 
 import { UserType } from './types/user';
 
@@ -19,7 +18,6 @@ class ErrorMessage extends AuthError {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  adapter: MongoDBAdapter(client),
   providers: [
     Google,
     credentials({
