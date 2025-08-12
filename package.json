@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "rm -rf node_modules && rm -rf .next && rm -rf && pnpm install",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.7.2",
@@ -31,6 +33,7 @@
     "nextjs-toploader": "^3.8.15",
     "nodemailer": "^6.9.16",
     "nuqs": "^2.4.1",
+    "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

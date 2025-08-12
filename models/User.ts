@@ -1,14 +1,6 @@
-import mongoose, { Model } from 'mongoose';
+import mongoose from 'mongoose';
 
-export interface UserType extends Base {
-  email: string;
-  phone: string;
-  password: string;
-  name: string;
-  role: 'admin' | 'user';
-}
-
-const userSchema = new mongoose.Schema<UserType>(
+const userSchema = new mongoose.Schema(
   {
     email: {
       type: String,
@@ -39,6 +31,5 @@ const userSchema = new mongoose.Schema<UserType>(
   }
 );
 
-const User: Model<UserType> =
-  mongoose.models.User || mongoose.model<UserType>('User', userSchema);
+const User = mongoose.models.User || mongoose.model('User', userSchema);
 export default User;

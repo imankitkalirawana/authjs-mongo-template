@@ -1,7 +1,15 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Card, CardBody, CardFooter, CardHeader, Chip, ScrollShadow } from '@heroui/react';
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Chip,
+  ScrollShadow
+} from '@heroui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Icon } from '@iconify/react/dist/iconify.js';
 
@@ -10,7 +18,7 @@ function ChatMessage({
   message,
   isUser,
   isTyping,
-  timestamp,
+  timestamp
 }: {
   message: string;
   isUser: boolean;
@@ -32,10 +40,14 @@ function ChatMessage({
         </div>
       )}
 
-      <div className={`flex flex-col ${isUser ? 'items-end' : 'items-start'} max-w-[75%]`}>
+      <div
+        className={`flex flex-col ${isUser ? 'items-end' : 'items-start'} max-w-[75%]`}
+      >
         <div
           className={`rounded-2xl px-4 py-3 ${
-            isUser ? 'bg-black text-white' : 'border border-gray-100 bg-gray-50 text-gray-900'
+            isUser
+              ? 'bg-black text-white'
+              : 'border border-gray-100 bg-gray-50 text-gray-900'
           }`}
         >
           {isTyping ? (
@@ -46,12 +58,12 @@ function ChatMessage({
                   <motion.div
                     key={i}
                     animate={{
-                      opacity: [0.4, 1, 0.4],
+                      opacity: [0.4, 1, 0.4]
                     }}
                     transition={{
                       duration: 1.2,
                       repeat: Number.POSITIVE_INFINITY,
-                      delay: i * 0.2,
+                      delay: i * 0.2
                     }}
                     className="h-1 w-1 rounded-full bg-gray-400"
                   />
@@ -59,11 +71,15 @@ function ChatMessage({
               </div>
             </div>
           ) : (
-            <p className="whitespace-pre-wrap text-start text-sm leading-relaxed">{message}</p>
+            <p className="whitespace-pre-wrap text-start text-sm leading-relaxed">
+              {message}
+            </p>
           )}
         </div>
 
-        {timestamp && <span className="mt-1 text-xs text-gray-400">{timestamp}</span>}
+        {timestamp && (
+          <span className="mt-1 text-xs text-gray-400">{timestamp}</span>
+        )}
       </div>
     </motion.div>
   );
@@ -72,7 +88,7 @@ function ChatMessage({
 // Premium AI Chat Interface
 function PremiumAIChatInterface({
   errorType,
-  onClose,
+  onClose
 }: {
   errorType: string;
   onClose: () => void;
@@ -85,9 +101,9 @@ function PremiumAIChatInterface({
       id: string;
     }>
   >([]);
-  const [currentStep, setCurrentStep] = useState<'initial' | 'feedback' | 'resolved' | 'escalate'>(
-    'initial'
-  );
+  const [currentStep, setCurrentStep] = useState<
+    'initial' | 'feedback' | 'resolved' | 'escalate'
+  >('initial');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -109,9 +125,9 @@ function PremiumAIChatInterface({
       isUser,
       timestamp: new Date().toLocaleTimeString([], {
         hour: '2-digit',
-        minute: '2-digit',
+        minute: '2-digit'
       }),
-      id: Date.now().toString(),
+      id: Date.now().toString()
     };
     setMessages((prev) => [...prev, newMessage]);
   };
@@ -158,7 +174,9 @@ Did this resolve your issue?`;
     }
   };
 
-  const handleEscalation = async (option: 'contact' | 'retry' | 'documentation') => {
+  const handleEscalation = async (
+    option: 'contact' | 'retry' | 'documentation'
+  ) => {
     if (option === 'contact') {
       addMessage('Contact support team', true);
       await simulateTyping(
@@ -231,7 +249,10 @@ Did this resolve your issue?`;
                 variant="bordered"
                 className="h-10 flex-1 border-gray-200 hover:bg-gray-50"
               >
-                <Icon icon="solar:external-link-linear" className="mr-2 h-4 w-4" />
+                <Icon
+                  icon="solar:external-link-linear"
+                  className="mr-2 h-4 w-4"
+                />
                 Documentation
               </Button>
             </div>
@@ -288,7 +309,7 @@ Did this resolve your issue?`;
 export default function Error({
   title,
   description,
-  type,
+  type
 }: {
   title?: string;
   description?: string;
@@ -302,25 +323,27 @@ export default function Error({
         return {
           code: '404',
           title: title || 'Page not found',
-          description: description || "The page you're looking for doesn't exist.",
+          description:
+            description || "The page you're looking for doesn't exist."
         };
       case 'unauthorized':
         return {
           code: '401',
           title: title || 'Unauthorized',
-          description: description || 'Please sign in to access this page.',
+          description: description || 'Please sign in to access this page.'
         };
       case 'forbidden':
         return {
           code: '403',
           title: title || 'Access denied',
-          description: description || "You don't have permission to access this resource.",
+          description:
+            description || "You don't have permission to access this resource."
         };
       default:
         return {
           code: '500',
           title: title || 'Something went wrong',
-          description: description || "We're working to fix this issue.",
+          description: description || "We're working to fix this issue."
         };
     }
   };
@@ -348,7 +371,9 @@ export default function Error({
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 md:text-5xl">
             {errorConfig.title}
           </h1>
-          <p className="text-lg leading-relaxed text-gray-600">{errorConfig.description}</p>
+          <p className="text-lg leading-relaxed text-gray-600">
+            {errorConfig.description}
+          </p>
         </motion.div>
 
         <motion.div
@@ -364,13 +389,18 @@ export default function Error({
             </CardHeader>
             <AnimatePresence>
               {showChat ? (
-                <PremiumAIChatInterface errorType={type} onClose={() => setShowChat(false)} />
+                <PremiumAIChatInterface
+                  errorType={type}
+                  onClose={() => setShowChat(false)}
+                />
               ) : (
                 <CardBody className="justify-center px-8 text-center">
-                  <h3 className="mb-2 text-xl font-semibold text-gray-900">Get instant help</h3>
+                  <h3 className="mb-2 text-xl font-semibold text-gray-900">
+                    Get instant help
+                  </h3>
                   <p className="text-sm leading-relaxed text-gray-600">
-                    Our AI assistant can provide step-by-step guidance to resolve this issue
-                    quickly.
+                    Our AI assistant can provide step-by-step guidance to
+                    resolve this issue quickly.
                   </p>
                 </CardBody>
               )}
@@ -378,8 +408,15 @@ export default function Error({
             <CardFooter>
               <AnimatePresence>
                 {showChat ? null : (
-                  <Button fullWidth onPress={() => setShowChat(true)} color="secondary">
-                    <Icon icon="solar:message-circle-linear" className="mr-2 h-4 w-4" />
+                  <Button
+                    fullWidth
+                    onPress={() => setShowChat(true)}
+                    color="secondary"
+                  >
+                    <Icon
+                      icon="solar:message-circle-linear"
+                      className="mr-2 h-4 w-4"
+                    />
                     Start conversation
                   </Button>
                 )}

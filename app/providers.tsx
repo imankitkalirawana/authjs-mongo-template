@@ -6,6 +6,7 @@ import { SessionProvider } from 'next-auth/react';
 import NextTopLoader from 'nextjs-toploader';
 import { useRouter } from 'nextjs-toploader/app';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { Session } from 'next-auth';
 
 declare module '@react-types/shared' {
   interface RouterConfig {
@@ -15,7 +16,13 @@ declare module '@react-types/shared' {
   }
 }
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function Providers({
+  children,
+  session
+}: {
+  children: React.ReactNode;
+  session: Session;
+}) {
   const router = useRouter();
 
   return (

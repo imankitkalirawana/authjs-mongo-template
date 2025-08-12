@@ -5,6 +5,7 @@ A modern, secure authentication system built with Next.js 14, featuring OTP veri
 This project implements a comprehensive authentication flow with features like user registration, login, password recovery, and session management. It uses Next.js's App Router architecture and integrates with MongoDB for data persistence. The UI is built using HeroUI components and Tailwind CSS for a polished, responsive design that supports both light and dark themes.
 
 ## Repository Structure
+
 ```
 .
 ├── app/                      # Next.js application routes and API handlers
@@ -24,20 +25,25 @@ This project implements a comprehensive authentication flow with features like u
 ```
 
 ## Usage Instructions
+
 ### Prerequisites
+
 - Node.js 18.x or later
 - MongoDB database
 - Email service provider credentials (for OTP delivery)
 - npm or yarn package manager
 
 ### Installation
+
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd <repository-name>
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 # or
@@ -45,11 +51,13 @@ yarn install
 ```
 
 3. Set up environment variables:
+
 ```bash
 cp .env.example .env.local
 ```
 
 Edit `.env.local` with your configuration:
+
 ```
 MONGODB_URI=your_mongodb_connection_string
 NEXTAUTH_SECRET=your_nextauth_secret
@@ -58,6 +66,7 @@ EMAIL_SERVER=your_email_server_details
 ```
 
 4. Run the development server:
+
 ```bash
 npm run dev
 # or
@@ -65,6 +74,7 @@ yarn dev
 ```
 
 ### Quick Start
+
 1. Register a new user:
    - Navigate to `/auth/register`
    - Enter email or phone number
@@ -77,7 +87,9 @@ yarn dev
    - Access dashboard after successful authentication
 
 ### More Detailed Examples
+
 1. Password Recovery:
+
 ```typescript
 // Request password reset
 await axios.post('/api/auth/forgot-password', { id: 'user@example.com' });
@@ -90,16 +102,18 @@ await axios.post('/api/auth/update-password', {
 ```
 
 2. Protected API Routes:
+
 ```typescript
 // Access protected route with session
 const response = await fetch('/api/users', {
   headers: {
-    'Authorization': `Bearer ${session.token}`
+    Authorization: `Bearer ${session.token}`
   }
 });
 ```
 
 ### Troubleshooting
+
 1. OTP Issues:
    - Check spam folder for email OTP
    - Verify phone number format (should include country code)
@@ -116,6 +130,7 @@ const response = await fetch('/api/users', {
    - Ensure network access to MongoDB instance
 
 ## Data Flow
+
 The authentication system follows a secure flow from registration to authenticated access.
 
 ```ascii
@@ -126,6 +141,7 @@ User Input -> OTP Verification -> Profile Creation -> Session Management
 ```
 
 Component Interactions:
+
 1. User enters email/phone in registration form
 2. System generates and sends OTP via email/SMS
 3. User verifies OTP to proceed with registration
