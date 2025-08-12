@@ -21,7 +21,7 @@ export function Providers({
   session
 }: {
   children: React.ReactNode;
-  session: Session;
+  session: Session | null;
 }) {
   const router = useRouter();
 
@@ -32,7 +32,7 @@ export function Providers({
           shouldShowTimeoutProgress: true
         }}
       />
-      <SessionProvider>
+      <SessionProvider session={session}>
         <NuqsAdapter>{children}</NuqsAdapter>
         <NextTopLoader
           height={4}

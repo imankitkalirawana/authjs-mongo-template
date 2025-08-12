@@ -14,12 +14,13 @@ import {
   Divider
 } from '@heroui/react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 import Logo from '../ui/logo';
+import { useSession } from 'next-auth/react';
 
-const Navbar = ({ session }: { session: any }) => {
+const Navbar = () => {
+  const { data: session } = useSession();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const pathname = usePathname();
   const DISABLED_ROUTES = ['/auth', '/dashboard'];
