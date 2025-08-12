@@ -133,7 +133,6 @@ const RegisterComponent: React.FC = () => {
                   .split('T')[0];
                 formik.setFieldValue('dob', dob);
               }}
-              // @ts-expect-error - TODO: fix this
               maxValue={today(getLocalTimeZone())}
               showMonthAndYearPickers
             />

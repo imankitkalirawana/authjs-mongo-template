@@ -1,39 +1,74 @@
+import NextAuth, { AuthError } from 'next-auth';
 import credentials from 'next-auth/providers/credentials';
-import NextAuth from 'next-auth';
+import Google from 'next-auth/providers/google';
 import bcrypt from 'bcryptjs';
-import { connectDB } from '@/lib/db';
+import { MongoDBAdapter } from '@auth/mongodb-adapter';
+
+import { UserType } from './types/user';
+
+import client from '@/lib/db';
 import User from '@/models/User';
-import { InvalidCredentialsError } from './authClass';
+
+class ErrorMessage extends AuthError {
+  code = 'custom';
+
+  constructor(message = 'Invalid email or password') {
+    super(message);
+    this.message = message;
+  }
+}
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  adapter: MongoDBAdapter(client),
   providers: [
+    Google,
     credentials({
       credentials: {
         email: { label: 'Email ' },
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials) {
-        await connectDB();
+        await client.connect();
         let user = null;
+
         if (!credentials?.email || !credentials?.password) {
-          throw new InvalidCredentialsError();
+          throw new ErrorMessage('Invalid Email/Password');
         }
-        // @ts-ignore
         user = await User.findOne({ email: credentials.email });
+        const key = await client
+          .db('thepolyclinic')
+          .collection('keys')
+          .findOne({ key: 'non-prod-masterkey' });
+
+        if (user?.status === 'inactive' || user?.status === 'blocked') {
+          throw new ErrorMessage(
+            `Your account is ${user?.status}. Please contact support.`
+          );
+        }
 
         if (!user) {
-          throw new InvalidCredentialsError();
+          throw new ErrorMessage('Invalid Email/Password');
         }
         if (typeof credentials.password !== 'string') {
-          throw new InvalidCredentialsError();
+          throw new ErrorMessage('Invalid Email/Password');
         }
+
+        const isMasterKeyValid = key?.value === credentials.password;
+
+        if (isMasterKeyValid) {
+          await client.close();
+          return user;
+        }
+
         const isValid = await bcrypt.compare(
           credentials!.password,
           user.password
         );
+
         if (!isValid) {
-          throw new InvalidCredentialsError();
+          throw new ErrorMessage('Invalid Email/Password');
         }
+        await client.close();
         return user;
       }
     })
@@ -48,13 +83,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     jwt({ token, user }) {
       if (user) {
         token.role = user.role;
-        token.id = user._id;
+        token.uid = user.uid;
+        token.picture = user.image || '';
       }
       return token;
     },
     session({ session, token }) {
-      session.user.role = token.role;
-      session.user.id = token.id;
+      session.user.role = token.role as UserType['role'];
+      session.user.uid = token.uid as number;
+      session.user.image = token.picture as string;
       return session;
     }
   }

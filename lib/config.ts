@@ -5,3 +5,16 @@ export const APP_INFO = {
   email: process.env.GMAIL || '',
   url: process.env.NEXTAUTH_URL || ''
 };
+
+export const WEBSITE_SETTING = {
+  status: {
+    maintainance: false,
+    registration: true,
+    login: true,
+    email: false
+  },
+  appearance: {
+    theme: 'light',
+    logo: '/images/logo.png'
+  }
+};
