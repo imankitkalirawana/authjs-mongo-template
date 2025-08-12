@@ -2,8 +2,9 @@ import { NextResponse } from 'next/server';
 import User from '@/models/User';
 import { connectDB } from '@/lib/db';
 import { auth } from '@/auth';
+import { NextAuthRequest } from 'next-auth';
 
-export const GET = auth(async function GET(request: any) {
+export const GET = auth(async function GET(request: NextAuthRequest) {
   try {
     if (request.auth?.user?.role !== 'admin') {
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });

@@ -1,6 +1,7 @@
+import { redirect } from 'next/navigation';
+
 import { auth } from '@/auth';
 import DashboardLayout from '@/components/dashboard/layout';
-import { redirect } from 'next/navigation';
 
 export default async function Layout({
   children
@@ -15,12 +16,9 @@ export default async function Layout({
 
   return (
     <>
-      {
-        // @ts-ignore
-        session && (
-          <DashboardLayout session={session}>{children}</DashboardLayout>
-        )
-      }
+      {session && (
+        <DashboardLayout session={session}>{children}</DashboardLayout>
+      )}
     </>
   );
 }
