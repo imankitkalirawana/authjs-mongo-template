@@ -7,13 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "clean": "rm -rf node_modules && rm -rf .next && rm -rf && pnpm install",
+    "clean": "rm -rf node_modules && rm -rf .next && pnpm install",
     "format": "prettier --write ."
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.9.1",
     "@aws-sdk/client-s3": "^3.679.0",
-    "@heroui/react": "2.7.5",
+    "@heroui/react": "2.7.6",
     "@iconify/react": "^5.0.2",
     "@internationalized/date": "^3.8.2",
     "@react-aria/i18n": "^3.12.11",
